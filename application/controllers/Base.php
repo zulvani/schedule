@@ -7,9 +7,19 @@ class BaseController extends CI_Controller {
 		parent::__construct();
 	}
 	
+	protected function isSignedIn(){
+		$this->load->library('session');
+		$signedInEmail = $this->session->tempdata('email');
+	
+		return $signedInEmail != '';
+	}
+	
 	public function render($view, $data = [], $layout = 'default') {
+		$this->load->library('session');
+		$nick = $this->session->tempdata('nick');
 		$dataHeader = [
 				'b' => $this->config->base_url(),
+				'nick' => $nick,
 		];
 		$dataFooter = [
 				'b' => $this->config->base_url(),

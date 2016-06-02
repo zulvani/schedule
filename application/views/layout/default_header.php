@@ -35,6 +35,6 @@
 
 <div id="wrapper">
 
-	<?php $this->load->view('layout/default_nav', []); ?>
+	<?php $this->load->view('layout/default_nav', ['nick' => $nick]); ?>
         
 	<div id="page-wrapper">
