@@ -43,11 +43,11 @@
 				</li>
 				<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>
 						Dashboard</a></li>
-				<li><a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span
+				<li><a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Data Management<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="flot.html">Flot Charts</a></li>
-						<li><a href="morris.html">Morris.js Charts</a></li>
+						<li><a href="<?=$this->config->base_url()?>index.php/employee">Employee</a></li>
+						<li><a href="morris.html">Client</a></li>
 					</ul> <!-- /.nav-second-level --></li>
 			</ul>
 		</div>

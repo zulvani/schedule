@@ -3,9 +3,6 @@
 	
 </div> <!-- /wrapper -->
 
-    <!-- jQuery -->
-    <script src="<?=$b . 'sb-admin'?>/bower_components/jquery/dist/jquery.min.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="<?=$b . 'sb-admin'?>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
