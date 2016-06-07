@@ -47,7 +47,7 @@
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href="<?=$this->config->base_url()?>index.php/employee">Employee</a></li>
-						<li><a href="morris.html">Client</a></li>
+						<li><a href="<?=$this->config->base_url()?>index.php/client">Client</a></li>
 					</ul> <!-- /.nav-second-level --></li>
 			</ul>
 		</div>
