@@ -30,3 +30,8 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 # SCHEDULE PROJECT
 # -----------------
 .project
+
+# TEST CONTROLLER AND VIEWS
+# -----------------
+application/controllers/Test.php
+application/views/test/
