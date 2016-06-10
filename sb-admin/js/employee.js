@@ -18,6 +18,9 @@ $('document').ready(function() {
 					alert(response.message);
 					window.location.href = b + '/index.php/employee/index';
 				}
+				else if (response.status == 'failed') {
+					alert(response.message);
+				}
 			}
 		});
 	});

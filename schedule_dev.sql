@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 02, 2016 at 09:24 AM
+-- Generation Time: Jun 11, 2016 at 06:43 AM
 -- Server version: 5.7.11
 -- PHP Version: 5.5.29
 
@@ -32,7 +32,7 @@ CREATE TABLE `client` (
   `address` varchar(255) DEFAULT NULL,
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL,
-  `email` int(255) DEFAULT NULL
+  `email` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -43,6 +43,7 @@ CREATE TABLE `client` (
 
 CREATE TABLE `employee` (
   `id` int(11) NOT NULL,
+  `nik` varchar(15) NOT NULL,
   `full_name` varchar(255) NOT NULL,
   `occupation` varchar(100) DEFAULT NULL,
   `created` datetime NOT NULL,
@@ -127,9 +128,19 @@ CREATE TABLE `visiting_realization` (
   `id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `alias` varchar(100) DEFAULT NULL,
+  `default` int(11) NOT NULL DEFAULT '0',
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `visiting_realization`
+--
+
+INSERT INTO `visiting_realization` (`id`, `title`, `alias`, `default`, `created`, `modified`) VALUES
+(1, 'SUCCESS', 'SUCCESS', 0, '2016-06-09 00:00:00', NULL),
+(2, 'CANCELLED', 'CANCELLED', 0, '2016-06-09 00:00:00', NULL),
+(3, 'NEW', 'NEW', 1, '2016-06-09 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -144,6 +155,14 @@ CREATE TABLE `visiting_type` (
   `created` datetime NOT NULL,
   `modified` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `visiting_type`
+--
+
+INSERT INTO `visiting_type` (`id`, `title`, `alias`, `created`, `modified`) VALUES
+(1, 'AUDIT', 'AUDIT', '2016-06-08 00:00:00', NULL),
+(2, 'MEETING', 'MEETING', '2016-06-08 00:00:00', NULL);
 
 --
 -- Indexes for dumped tables
@@ -237,12 +256,12 @@ ALTER TABLE `schedule_employee`
 -- AUTO_INCREMENT for table `visiting_realization`
 --
 ALTER TABLE `visiting_realization`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `visiting_type`
 --
 ALTER TABLE `visiting_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
