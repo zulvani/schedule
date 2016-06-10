@@ -43,6 +43,12 @@ class Base_model extends CI_Model {
 			}
 		}
 		
+		if(isset($criteria['in'])){
+			foreach($criteria['in'] as $k => $v) {
+				$this->db->where_in($k, $v);
+			}
+		}
+		
 		if(isset($criteria['limit'])){
 			$limit = $criteria['limit'];
 			$offset = $criteria['offset'];

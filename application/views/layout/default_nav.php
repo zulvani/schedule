@@ -49,6 +49,11 @@
 						<li><a href="<?=$this->config->base_url()?>index.php/employee">Employee</a></li>
 						<li><a href="<?=$this->config->base_url()?>index.php/client">Client</a></li>
 					</ul> <!-- /.nav-second-level --></li>
+				<li><a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Schedule Managmenet<span
+						class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="<?=$this->config->base_url()?>index.php/schedule">Schedule</a></li>
+					</ul> <!-- /.nav-second-level --></li>
 			</ul>
 		</div>
 		<!-- /.sidebar-collapse -->

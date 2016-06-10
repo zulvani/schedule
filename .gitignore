@@ -35,3 +35,6 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 # -----------------
 application/controllers/Test.php
 application/views/test/
+
+application/config/mandrill.php
+application/libraries/Mandrill.php

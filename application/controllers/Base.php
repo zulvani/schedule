@@ -28,5 +28,25 @@ class BaseController extends CI_Controller {
 		$this->load->view($view, $data);
 		$this->load->view('layout/default_footer', $dataFooter);
 	}
+	
+	function sendEmail($to, $message, $subject, 
+			$sender_email = 'no-reply@gmail.com', $sender_name = 'PT. MAL', $debug_mode = false){
+		$sent = false;
+		
+		# load email library
+		$this->load->library("email");
+	
+		$this->email->from($sender_email, $sender_name);
+		$this->email->to($to);
+		$this->email->subject($subject);
+		$this->email->message($message);
+		$sent = $this->email->send();
+			
+		if($debug_mode){
+			echo $this->email->print_debugger();
+		}
+	
+		return $sent;
+	}
 }
 ?>
