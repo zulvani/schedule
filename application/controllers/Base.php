@@ -15,6 +15,7 @@ class BaseController extends CI_Controller {
 	}
 	
 	public function render($view, $data = [], $layout = 'default') {
+		$this->load->helper('form');
 		$this->load->library('session');
 		$nick = $this->session->tempdata('nick');
 		$dataHeader = [

@@ -32,14 +32,16 @@
 		<div class="sidebar-nav navbar-collapse">
 			<ul class="nav" id="side-menu">
 				<li class="sidebar-search">
+					<?php echo form_open('schedule/search') ?>
 					<div class="input-group custom-search-form">
-						<input type="text" class="form-control" placeholder="Search..."> <span
+						<input type="text" class="form-control" name="keyword" placeholder="Search..."> <span
 							class="input-group-btn">
-							<button class="btn btn-default" type="button">
+							<button type="submit" class="btn btn-default">
 								<i class="fa fa-search"></i>
 							</button>
 						</span>
 					</div> <!-- /input-group -->
+					</form>
 				</li>
 				<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>
 						Dashboard</a></li>

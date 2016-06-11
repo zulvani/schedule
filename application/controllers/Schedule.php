@@ -176,4 +176,50 @@ class Schedule extends BaseController {
 		header('Content-type: application/json');
 		echo json_encode($res);
 	}
+	
+	public function search() {
+		$keyword = $this->input->post('keyword');
+		$keywords = explode(',', $keyword);
+		$where = [];
+		$this->load->model('schedule_model');
+		
+		foreach($keywords as $k => $v){
+			if(substr($v, 0, 7) == 'period:'){
+				$start = substr($v, 7, 10);
+				$end = substr($v, 18, 10);
+				
+				$where['period'] = [
+						'start' => $start,
+						'end' => $end
+				];
+			}
+		}
+		
+		// mengambil data visiting type untuk ditampilkan di drowpdown
+		$types = [];
+		foreach($this->getVisitingTypes() as $obj){
+			$types[$obj->title] = $obj->title;
+		}
+		
+		// mengambil data realization untuk ditampilkan di dropdown
+		// jika default = 1 maka realization tersebut akan terpilih
+		$realizations = [];
+		$selectedRealization = '';
+		foreach($this->getVisitingRealizations() as $obj){
+			$realizations[$obj->title] = $obj->title;
+			if($obj->default == 1){
+				$selectedRealization = $obj->title;
+			}
+		}
+		$schedules = $this->schedule_model->advanceSearch($where);
+		
+		$data = [
+				'schedules' => $schedules,
+				'types' => $types,
+				'realizations' => $realizations,
+				'selectedRealization' => $selectedRealization
+		];
+		
+		$this->render('schedule/index', $data);
+	}
 }
