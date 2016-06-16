@@ -62,10 +62,17 @@ var b = "<?=$this->config->base_url()?>";
 								<td><?=$s->created?></td>
 								<td><?=$s->modified?></td>
 								<td>
-									<button class="btn btn-primary btn-xs"
-										onclick="modify(<?=$s->id?>)">Modify</button>
+									<?php if($s->visiting_realization == 'NEW') { ?>
+									<a href="<?=$this->config->base_url()?>index.php/schedule/cancel/<?=$s->id?>" 
+										class="btn btn-primary btn-xs" onclick="if(!confirm('Yakin?'))return false;">Cancel</a>
+										
+									<a href="<?=$this->config->base_url()?>index.php/schedule/success/<?=$s->id?>" 
+										class="btn btn-primary btn-xs" onclick="if(!confirm('Yakin?'))return false;">Success</a>
+										
 									<button class="btn btn-primary btn-xs"
 										onclick="removeSchedule(<?=$s->id?>)">Remove</button>
+									<?php } ?>
+
 								</td>
 							</tr>
 					<?php $no++; } ?>

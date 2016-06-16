@@ -1,5 +1,13 @@
 $('document').ready(function() {
 	$('#btn-add').click(function() {
+		$('#id').val('');
+		$('#start').val('');
+		$('#end').val('');
+		$('#venue').val('');
+		$('#target').val('');
+		$('#result').val('');
+		$('#employees').val('');
+		$('#clients').val('');
 		$('#modal-form-schedule').modal();
 	});
 
@@ -20,14 +28,18 @@ $('document').ready(function() {
 
 function modify(id){
 	$.ajax({
-		url : b + 'index.php/client/modify/' + id,
+		url : b + 'index.php/schedule/modify/' + id,
 		method: 'GET',
 		success : function(response) {
-			$('#id').val(response.id);
-			$('#name').val(response.name);
-			$('#email').val(response.email);
-			$('#address').val(response.address);
-			$('#modal-form-client').modal();
+			$('#id').val(response.schedule.id);
+			$('#start').val(response.schedule.start);
+			$('#end').val(response.schedule.end);
+			$('#venue').val(response.schedule.venue);
+			$('#target').val(response.schedule.target);
+			$('#result').val(response.schedule.result);
+			$('#employees').val(response.employees);
+			$('#clients').val(response.clients);
+			$('#modal-form-schedule').modal();
 		}
 	});
 }

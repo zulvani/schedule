@@ -47,6 +47,8 @@ class Schedule extends BaseController {
 		// asumsikan saat ini response gagal
 		$res = ['status' => 'failed', 'message' => 'Something went wrong'];
 		
+		$id = $this->input->post('id');
+		
 		// ambil inputan dari form
 		$data = [
 			'visiting_type' => $this->input->post('visiting_type'),
@@ -221,5 +223,69 @@ class Schedule extends BaseController {
 		];
 		
 		$this->render('schedule/index', $data);
+	}
+	
+	public function modify($id) {
+		$this->load->helper('form');
+		$this->load->model('schedule_model');
+		$schedule = $this->schedule_model->getOne($id, 'schedule');
+		
+		$employees = '';
+		$clients = '';
+		
+		if($schedule != null) {
+			$this->load->model('scheduleemployee_model');
+			$se = $this->scheduleemployee_model->search([
+					'table' => 'schedule_employee',
+					'where' => ['schedule_id' => $schedule->id],
+			]);
+			
+			foreach($se as $obj) {
+				$employees .= $obj->id . ',';
+			}
+			$employees = ($employees != '') ? substr($employees, 0, strlen($employees) - 1) : '';
+			
+			$this->load->model('scheduleclient_model');
+			$se = $this->scheduleclient_model->search([
+					'table' => 'schedule_client',
+					'where' => ['schedule_id' => $schedule->id],
+			]);
+				
+			foreach($se as $obj) {
+				$clients .= $obj->id . ',';
+			}
+			$clients = ($clients != '') ? substr($clients, 0, strlen($clients) - 1) : '';
+		}
+		
+		header('Content-type: application/json');
+		echo json_encode(['schedule' => $schedule, 'employees' => $employees, 'clients' => $clients]);
+	}
+	
+	public function cancel($id) {
+		$this->load->model('schedule_model');
+		$schedule = $this->schedule_model->getOne($id, 'schedule');
+		if($schedule != null && $schedule->visiting_realization == 'NEW') {
+			$data = [
+					'visiting_realization' => 'CANCELLED',
+					'id' => $id
+			];
+			
+			$this->schedule_model->update($data, 'schedule');
+			$this->index();
+		}
+	}
+	
+	public function success($id) {
+		$this->load->model('schedule_model');
+		$schedule = $this->schedule_model->getOne($id, 'schedule');
+		if($schedule != null && $schedule->visiting_realization == 'NEW') {
+			$data = [
+					'visiting_realization' => 'SUCCESS',
+					'id' => $id
+			];
+			
+			$this->schedule_model->update($data, 'schedule');
+			$this->index();
+		}
 	}
 }
