@@ -33,6 +33,12 @@
 </head>
 
 <body>
+	<script>
+		var b = '<?=$this->config->base_url()?>';
+		var l = '<?=(isset($logout) ? 1 : 0)?>';
+	</script>
+	
+	<script src="<?=$this->config->base_url() . 'sb-admin'?>/js/fb.js"></script>
 
     <div class="container">
         <div class="row">
@@ -53,6 +59,9 @@
                                 
                                 <!-- Change this to a button or input when using this as a form -->
                                 <input type="submit" class="btn btn-lg btn-success btn-block" value="Sign In"/>
+                                <br/>
+                                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+								</fb:login-button>
                             </fieldset>
                         </form>
                         <br/>

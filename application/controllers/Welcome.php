@@ -73,7 +73,22 @@ class Welcome extends BaseController {
 		unset($_SESSION['signinTime']);
 		
 		// direct ke halaman sign in
-		$this->load->view('signin');
+		$this->load->view('signin', ['logout' => true]);
 	}
 	
+	public function signedin() {
+		$this->load->library('session');
+			
+		$validUser = [
+				'email'=> $_GET['email'],
+				'nick' => $_GET['name'],
+				'signinTime' => date('Y-m-d H:i:s')
+		];
+			
+		foreach($validUser as $k => $v){
+			$this->session->set_tempdata($k, $v, 1800);
+		}
+			
+		$this->render('home');
+	}
 }
