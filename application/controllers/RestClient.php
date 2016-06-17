@@ -1,7 +1,7 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 require_once 'Base.php';
-class RestEmployee extends BaseController {
+class RestClient extends BaseController {
 	
 	private function invoke($Url, $data = [], $method = 'GET') {
 		// apakah cURL sudah diinstall?
@@ -11,11 +11,10 @@ class RestEmployee extends BaseController {
 		
 		$ch = curl_init();
 		
-		// Set URL
-		curl_setopt ( $ch, CURLOPT_URL, $Url );
-		
-		// Include header in result? (0 = yes, 1 = no)
-		curl_setopt ( $ch, CURLOPT_HEADER, 0 );
+		// tambahkan secretKey jika belum di definisikan
+		if(!isset($data['secretKey'])) {
+			$data['secretKey'] = '5ebe2294ecd0e0f08eab7690d2a6ee69';
+		}
 		
 		// binding parameters
 		$params = '';
@@ -25,13 +24,20 @@ class RestEmployee extends BaseController {
 		}
 		$params = substr($params, 0, strlen($params) - 1);
 		
+		if($method == 'GET'){
+			$Url .= '?' . $params;
+		}
+		
+		// Set URL
+		curl_setopt ( $ch, CURLOPT_URL, $Url );
+		
+		// Include header in result? (0 = yes, 1 = no)
+		curl_setopt ( $ch, CURLOPT_HEADER, 0 );
+		
 		// set method
 		if($method == 'POST') {
 			curl_setopt($ch, CURLOPT_POST, 1);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-		}
-		else if($method == 'GET'){
-			$Url .= '?' . $params;
 		}
 		
 		// Should cURL return or print out the data? (true = return, false = print)
@@ -49,7 +55,7 @@ class RestEmployee extends BaseController {
 	public function index() {
 		$employees = $this->invoke('http://kis.local/schedule/index.php/api/v1/employee');
 		$employees = json_decode($employees);
-		
+		print_r($employees);die;
 		foreach($employees as $e){
 			echo $e->full_name . '<br/>';
 		}

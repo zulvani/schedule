@@ -3,6 +3,30 @@ require_once 'Base.php';
 
 class RestEmployee extends BaseController {
 	
+	public function __construct() {
+		parent::__construct();
+		$sk = '';
+		if($_SERVER['REQUEST_METHOD'] == 'GET'){
+			$sk = (isset($_GET['secretKey'])) ? $_GET['secretKey'] : '';
+		}
+		else if($_SERVER['REQUEST_METHOD'] == 'POST'){
+			$sk = (isset($_POST['secretKey'])) ? $_POST['secretKey'] : '';
+		}
+		
+		if($sk != ''){
+			if($sk != '5ebe2294ecd0e0f08eab7690d2a6ee69'){
+				header('Content-type: application/json');
+				echo json_encode(['status' => 'forbidden', 'message' => 'Invalid Secret Key']);
+				die;
+			}
+		}
+		else{
+			header('Content-type: application/json');
+			echo json_encode(['status' => 'forbidden', 'message' => 'Access violation!']);
+			die;
+		}
+	}
+	
 	public function index($id = '') {
 		$this->load->model('employee_model');
 		$res = [];
